@@ -10,7 +10,9 @@ class Planet
 		@file = file
 	end
 
-	def force
-		
+	G = 6.67408*10**-11
+
+	def gravity
+		G*mass.planets/urmojm
 	end
 end

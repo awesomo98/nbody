@@ -12,15 +12,23 @@ class Window < Gosu::Window
 
 		@sun = Sun.new
 		@sun.warp(width/2.0, height/2.0)
+
+		@planets = []
 	end
 
 	def draw
 		@background_image.draw(0, 0, ZOrder::BACKGROUND)
 		@sun.draw
+		@planets.each
+	end
+
+	def starting_position
+		file = File.open("planets.txt", "r")
+		file.each_line do |line|
 	end
 
 	def update
-		file = File.open()
+		
 	end
 
 	def button_down(id)
