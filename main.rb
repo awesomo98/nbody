@@ -25,17 +25,30 @@ class Window < Gosu::Window
 	def starting_position
 		file = File.open("planets.txt", "r")
 		file.each_line do |line|
+			array = line.chomp.split(" ")
+			@planets.push(Planet.new(array[0].to_f, array[1].to_f, array[2].to_f, array[3].to_f, array[4], array[5]))
+		end
 	end
 
 	def update
-		
+		for i in 0..(array.length - 1) do
+			for j in 0..(array.length - 1)
+				if i != j
+					@planets[i].forces(@planets[k])
+					print @planets[i].file
+					print @planets[k].file
+					puts
+				end
+			end
+		end	
 	end
 
 	def button_down(id)
 		close if id == Gosu::KbEscape
 	end
+
+	end
 	
 
 window = Window.new
 window.show
-end

@@ -13,6 +13,8 @@ class Planet
 	G = 6.67408*10**-11
 
 	def gravity
-		G*mass.planets/urmojm
+		force = ((G*self.mass*planet.mass)/((self.xpos) - (planet.xpos))**2)
+		print force.to_f
+		puts
 	end
 end
