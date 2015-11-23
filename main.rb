@@ -57,7 +57,7 @@ class Window < Gosu::Window
 		close if id == Gosu::KbEscape
 	end
 
-	end
+end
 	
 
 window = Window.new
