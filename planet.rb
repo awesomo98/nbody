@@ -10,11 +10,11 @@ class Planet
 		@file = file
 	end
 
-	G = 6.67408*10**-11
+	G = 6.67408*10**(-11)
 
-	def gravity
+	def gravity(planet)
 		force = ((G*self.mass*planet.mass)/((self.xpos) - (planet.xpos))**2)
-		print force.to_f
+		print force
 		puts
 	end
 end

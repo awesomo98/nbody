@@ -14,6 +14,7 @@ class Window < Gosu::Window
 		@sun.warp(width/2.0, height/2.0)
 
 		@planets = []
+		@line = 0
 	end
 
 	def draw
@@ -23,25 +24,34 @@ class Window < Gosu::Window
 	end
 
 	def starting_position
-		file = File.open("planets.txt", "r")
+		file = File.open("simulations/planets.txt", "r")
 		file.each_line do |line|
 			array = line.chomp.split(" ")
-			@planets.push(Planet.new(array[0].to_f, array[1].to_f, array[2].to_f, array[3].to_f, array[4], array[5]))
+			# if @line == 1
+
+			# end 
+			@planets.push(Planet.new(array[0].to_f, array[1].to_f, array[2].to_f, array[3].to_f, array[4].to_f, array[5]))
+			print @planets
 		end
 	end
 
 	def update
-		for i in 0..(array.length - 1) do
-			for j in 0..(array.length - 1)
+		starting_position
+		for i in 0..(@planets.length - 1) do
+			for j in 0..(@planets.length - 1)
 				if i != j
-					@planets[i].forces(@planets[k])
+					@planets[i].gravity(@planets[j])
 					print @planets[i].file
-					print @planets[k].file
+					print @planets[j].file
 					puts
 				end
 			end
 		end	
 	end
+
+	# def draw
+	# 	@planets.each {|planet| planet.draw}
+	# end
 
 	def button_down(id)
 		close if id == Gosu::KbEscape
