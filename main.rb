@@ -10,8 +10,8 @@ class Window < Gosu::Window
 
 		@background_image = Gosu::Image.new("images/eagle.jpg")
 
-		@sun = Sun.new
-		@sun.warp(width/2.0, height/2.0)
+		# @sun = Sun.new
+		# @sun.warp(width/2.0, height/2.0)
 
 		@planets = []
 		@line = 0
@@ -22,20 +22,26 @@ class Window < Gosu::Window
 
 	def draw
 		@background_image.draw(0, 0, ZOrder::BACKGROUND)
-		@sun.draw
-		@planets.each
+		@planets.each {|planet| planet.draw}
+		
 	end
 
 	def starting_position
 		file = File.open("simulations/planets.txt", "r")
+		row = 1
 		file.each_line do |line|
 			array = line.chomp.split(" ")
-			if @line == 1
+			if row == 1
+				row += 1
 				@universe = array[0.to_f*2]
-			else 
+				print "k"
+			elsif row == 2
 				# @win_x = array[0].to_f/@universe_size*@width + @width/2
 				# @win_y = array[1].to_f/@universe_size*@height + @height/2
+				row += 1
+			elsif row > 2
 				@planets.push(Planet.new(array[0].to_f, array[1].to_f, array[2].to_f, array[3].to_f, array[4].to_f, array[5]))
+				row += 1
 				print @planets
 			end
 		end
@@ -53,10 +59,6 @@ class Window < Gosu::Window
 				end
 			end
 		end	
-	end
-
-	def draw
-		@planets.each {|planet| planet.draw}
 	end
 
 	def button_down(id)
