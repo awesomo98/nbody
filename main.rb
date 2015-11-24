@@ -20,12 +20,6 @@ class Window < Gosu::Window
 		@win_y = 0
 	end
 
-	def draw
-		@background_image.draw(0, 0, ZOrder::BACKGROUND)
-		@planets.each {|planet| planet.draw}
-		
-	end
-
 	def starting_position
 		file = File.open("simulations/planets.txt", "r")
 		row = 1
@@ -49,16 +43,20 @@ class Window < Gosu::Window
 
 	def update
 		starting_position
-		for i in 0..(@planets.length - 1) do
-			for j in 0..(@planets.length - 1)
+		for i in 0...(@planets.length) do
+			for j in 0...(@planets.length) do
 				if i != j
 					@planets[i].gravity(@planets[j])
 					print @planets[i].file
 					print @planets[j].file
-					puts
 				end
 			end
 		end	
+	end
+
+		def draw
+		@background_image.draw(0, 0, ZOrder::BACKGROUND)
+		@planets.each {|planet| planet.draw}		
 	end
 
 	def button_down(id)
